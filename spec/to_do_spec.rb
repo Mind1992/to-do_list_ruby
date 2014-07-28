@@ -11,4 +11,9 @@ describe Task do
     test_task = Task.new('scrub the zebra')
     test_task.description.should eq 'scrub the zebra'
   end
+
+  it 'lets you mark a task as completed' do
+    test_task = Task.new('scrub the zebra')
+    test_task.mark_complete.should eq true
+  end
 end
