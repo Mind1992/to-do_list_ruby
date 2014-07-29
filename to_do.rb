@@ -1,9 +1,11 @@
 require './lib/task'
-
+require './lib/list'
+@lists = []
 @list = []
 
 def main_menu
   loop do
+    puts "Press 'al' to add a new list or 'll' to list all of your lists."
     puts "Press 'a' to add a task or 'l' to list all of your tasks."
     puts "Press 'x' to exit."
     main_choice = gets.chomp
@@ -11,6 +13,10 @@ def main_menu
       add_task
     elsif main_choice == 'l'
       list_tasks
+    elsif main_choice == 'll'
+      list_lists
+    elsif main_choice == 'al'
+      add_list
     elsif main_choice == 'x'
       puts "Good-bye!"
       exit
@@ -31,10 +37,10 @@ def list_tasks
   puts "Here are all of your tasks:"
   @list.each do |task|
     if task.status == false
-    puts task.description
+      puts task.description
+    end
   end
-  end
-  puts "\n"
+  puts 
   puts "To select a task from the list type the number of the task"
   selected_task = gets.chomp.to_i
   task_text = @list[selected_task - 1].description
@@ -46,10 +52,23 @@ def list_tasks
       @list[selected_task-1].mark_complete
   else
     puts "Sorry, that wasn't a valid option."
+    list_tasks
   end
-  # puts "To mark an task complete and remove it from the list, press 'c'"
-  # list_change = gets.chomp
-  # if list_change == 'c'
+end
+
+def add_list
+  puts "Name the new list:"
+  user_input = gets.chomp
+  @lists << List.new(user_input)
+  p @lists
+  puts "List added.\n\n"
+end
+
+def list_lists
+  puts "Here are all of your lists:"
+  @lists.each do |list|
+    puts list.tasks
+  end
 end
 
 
