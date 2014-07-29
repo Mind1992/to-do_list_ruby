@@ -117,4 +117,19 @@ end
       list.sort_by_date.should eq [task2, task1]
       end
     end
+
+     describe '.sort_by_priority' do
+      it 'sorts tasks within a list by priority' do
+      list = List.new('Epicodus')
+      list.save
+      task1 = Task.new("Learn Ruby")
+      task2 = Task.new("Learn Rails")
+
+      task1.scale_priority(5)
+      task2.scale_priority(3)
+      list.add_task(task1)
+      list.add_task(task2)
+      list.sort_by_priority.should eq [task2, task1]
+      end
+    end
 end

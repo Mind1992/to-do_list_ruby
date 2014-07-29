@@ -14,7 +14,11 @@ class List
   end
 
   def sort_by_date
-    @tasks.sort_by {|task| task.due_date}
+    @tasks.sort_by {|task| task.due_date }
+  end
+
+  def sort_by_priority
+    @tasks.sort_by {|task| task.priority }
   end
 
   def save
