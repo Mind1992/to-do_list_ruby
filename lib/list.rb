@@ -5,6 +5,14 @@ class List
     @@all_lists
   end
 
+  def List.clear
+    @@all_lists = []
+  end
+
+  def sort_by_name
+    @tasks.sort_by {|task| task.description}
+  end
+
   def save
     @@all_lists << self
   end

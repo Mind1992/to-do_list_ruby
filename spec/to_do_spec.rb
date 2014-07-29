@@ -85,9 +85,21 @@ end
 
   describe '.clear' do
     it 'empties out all the saved lists' do
-      Task.new('Learn ruby').save
-      Task.clear
-      Task.all.should eq []
+      List.new('Learn ruby').save
+      List.clear
+      List.all.should eq []
+    end
+  end
+
+  describe '.sort_by_name' do
+    it 'sorts tasks within a list by name' do
+      list = List.new('Epicodus')
+      list.save
+      task1 = Task.new("Learn Ruby")
+      task2 = Task.new("Build Ruby")
+      list.add_task(task1)
+      list.add_task(task2)
+      list.sort_by_name.should eq [task2, task1]
     end
   end
 end

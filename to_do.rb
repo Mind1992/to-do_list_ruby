@@ -42,7 +42,6 @@ def list_tasks
   puts "To select a task from the list type the number of the task"
   selected_task = gets.chomp.to_i
   @task = Task.all[selected_task - 1]
-
   p "The currently selected task is **#{@task.description}**."
   puts "To mark **#{@task.description}** as complete and remove it, press 'c'"
   puts "To move **#{@task.description}** to a list press 'mv'"
@@ -107,6 +106,7 @@ def scale_priority
   @task.scale_priority(user_input)
   puts "You just scaled **#{@task.description}** to #{@task.pri}"
 end
+
 
 
 main_menu
