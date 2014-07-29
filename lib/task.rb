@@ -1,4 +1,13 @@
 class Task
+  @@all_tasks = []
+
+  def Task.all
+    @@all_tasks
+  end
+
+  def Task.clear
+    @@all_tasks = []
+  end
 
   def initialize(description, status=false, due_date=0, priority=0)
     @description = description
@@ -33,6 +42,10 @@ class Task
 
   def priority
     @priority
+  end
+
+  def save
+    @@all_tasks << self
   end
 
 end

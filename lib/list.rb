@@ -1,4 +1,14 @@
 class List
+  @@all_lists = []
+
+  def List.all
+    @@all_lists
+  end
+
+  def save
+    @@all_lists << self
+  end
+
 	def initialize(name)
 		@name = name
     @tasks = []

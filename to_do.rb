@@ -1,7 +1,6 @@
 require './lib/task'
 require './lib/list'
 @lists = []
-@list = []
 
 def main_menu
   loop do
@@ -29,13 +28,13 @@ end
 def add_task
   puts "Enter a description of the new task:"
   user_description = gets.chomp
-  @list << Task.new(user_description)
+  Task.all << Task.new(user_description)
   puts "Task added.\n\n"
 end
 
 def list_tasks
   puts "Here are all of your tasks:"
-  @list.each do |task|
+  Task.all.each do |task|
     if task.status == false
       puts task.description
     end
@@ -43,7 +42,7 @@ def list_tasks
   puts
   puts "To select a task from the list type the number of the task"
   selected_task = gets.chomp.to_i
-  @task = @list[selected_task - 1]
+  @task = Task.all[selected_task - 1]
 
   p "The currently selected task is **#{@task.description}**."
   puts "To mark **#{@task.description}** as complete and remove it, press 'c'"
@@ -52,7 +51,7 @@ def list_tasks
   puts "To scale due date for **#{@task.description}**, press 'sd'"
   list_option = gets.chomp
   if list_option == 'c'
-      @list[selected_task-1].mark_complete
+      complete_task
   elsif list_option == 'mv'
         add_task_to_list
   elsif list_option == 'sp'
@@ -65,28 +64,32 @@ def list_tasks
   end
 end
 
+def complete_task
+  Task.all[selected_task-1].mark_complete
+end
+
 def add_list
   puts "Name the new list:\n"
   user_input = gets.chomp
-  @lists << List.new(user_input)
+  List.all << List.new(user_input)
   puts "List added.\n\n"
 end
 
 def list_lists
   puts "Here are all of your lists:"
-  @lists.each do |list|
+  List.all.each do |list|
     p list.name
   end
 end
 
 def add_task_to_list
   puts "Select a list you want to move your task in."
-  @lists.each do |list|
+  List.all.each do |list|
     p list.name
   end
   puts "To select a list, type the number of the list"
   selected_list = gets.chomp.to_i
-  list = @lists[selected_list - 1]
+  list = List.all[selected_list - 1]
   p "The currently selected list is #{list.name}."
   list.add_task(@task)
   puts "**#{@task.description}** added to the list **#{list.name}**"
@@ -103,7 +106,7 @@ def scale_priority
   puts "Scale priority from 1 to 5 for **#{@task.description}**: "
   user_input = gets.chomp.to_i
   @task.scale_priority(user_input)
-  puts "You just scaled **#{@task.description}** to #{@task.priority}"
+  puts "You just scaled **#{@task.description}** to #{@task.pri}"
 end
 
 
