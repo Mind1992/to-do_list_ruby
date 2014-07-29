@@ -3,7 +3,7 @@ require 'task'
 require 'list'
 
 describe Task do
-  it 'us initialized with a description' do
+  it 'is initialized with a description' do
     test_task = Task.new('scrub the zebra')
     test_task.should be_an_instance_of Task
   end
@@ -17,16 +17,18 @@ describe Task do
     test_task = Task.new('scrub the zebra')
     test_task.mark_complete.should eq true
   end
+
+  it ''
 end
 
 
-describe List do 
-  it 'starts out with an empty list of tasks' do 
+describe List do
+  it 'starts out with an empty list of tasks' do
     test_list = List.new("School stuff")
     test_list.tasks.should eq []
   end
 
-    it "can add tasks" do 
+    it "can add tasks" do
     test_list = List.new("School stuff")
     test_task = Task.new("Learn Ruby")
     test_list.add_task(test_task)

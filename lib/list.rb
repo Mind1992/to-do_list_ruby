@@ -1,14 +1,19 @@
 class List
-	def initialize(tasks)
-		@tasks = tasks
+	def initialize(name)
+		@name = name
+    @tasks = []
 	end
 
 	def tasks
-		@tasks = []
+		@tasks
 	end
 
-	def add_task
-		@tasks 
+  def name
+    @name
+  end
+
+	def add_task(task)
+		@tasks << task
 	end
 end
 

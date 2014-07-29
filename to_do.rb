@@ -40,16 +40,19 @@ def list_tasks
       puts task.description
     end
   end
-  puts 
+  puts
   puts "To select a task from the list type the number of the task"
   selected_task = gets.chomp.to_i
-  task_text = @list[selected_task - 1].description
+  @task = @list[selected_task - 1]
 
-  p "The currently selected item is #{task_text}."
+  p "The currently selected task is #{@task.description}."
   puts "To mark it as complete and remove it, press 'c'"
+  puts "To move this task to a list press 'mv'"
   list_option = gets.chomp
   if list_option == 'c'
       @list[selected_task-1].mark_complete
+  elsif list_option == 'mv'
+        add_task_to_list
   else
     puts "Sorry, that wasn't a valid option."
     list_tasks
@@ -57,18 +60,30 @@ def list_tasks
 end
 
 def add_list
-  puts "Name the new list:"
+  puts "Name the new list:\n"
   user_input = gets.chomp
   @lists << List.new(user_input)
-  p @lists
   puts "List added.\n\n"
 end
 
 def list_lists
   puts "Here are all of your lists:"
   @lists.each do |list|
-    puts list.tasks
+    p list.name
   end
+end
+
+def add_task_to_list
+  puts "Select a list you want to move your task in."
+  @lists.each do |list|
+    p list.name
+  end
+  puts "To select a list, type the number of the list"
+  selected_list = gets.chomp.to_i
+  list = @lists[selected_list - 1]
+  p "The currently selected list is #{list.name}."
+  list.add_task(@task)
+  puts "**#{@task.description}** added to the list **#{list.name}**"
 end
 
 
