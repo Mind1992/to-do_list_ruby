@@ -21,6 +21,10 @@ class List
     @tasks.sort_by {|task| task.priority }
   end
 
+  def show_completed_tasks
+    @tasks.each {|task| @tasks.delete(task) if task.status == false}
+  end
+
   def save
     @@all_lists << self
   end

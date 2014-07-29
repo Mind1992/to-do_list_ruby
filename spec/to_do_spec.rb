@@ -132,4 +132,22 @@ end
       list.sort_by_priority.should eq [task2, task1]
       end
     end
+
+    describe '.show_completed_tasks' do
+      it 'shows all completed tasks' do
+        list = List.new('Epicodus')
+        list.save
+        task1 = Task.new("Learn Ruby")
+        task2 = Task.new("Learn Rails")
+        task3 = Task.new("Learn SQL")
+
+        task1.mark_complete
+        task2.mark_complete
+        list.add_task(task1)
+        list.add_task(task2)
+        list.add_task(task3)
+
+        list.show_completed_tasks.should eq [task1, task2]
+      end
+    end
 end
