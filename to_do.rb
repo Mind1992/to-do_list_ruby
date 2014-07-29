@@ -1,6 +1,5 @@
 require './lib/task'
 require './lib/list'
-@lists = []
 
 def main_menu
   loop do
@@ -28,7 +27,7 @@ end
 def add_task
   puts "Enter a description of the new task:"
   user_description = gets.chomp
-  Task.all << Task.new(user_description)
+  Task.new(user_description).save
   puts "Task added.\n\n"
 end
 
@@ -71,7 +70,7 @@ end
 def add_list
   puts "Name the new list:\n"
   user_input = gets.chomp
-  List.all << List.new(user_input)
+  List.new(user_input).save
   puts "List added.\n\n"
 end
 

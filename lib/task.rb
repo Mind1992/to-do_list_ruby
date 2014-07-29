@@ -9,6 +9,11 @@ class Task
     @@all_tasks = []
   end
 
+  def save
+    @@all_tasks << self
+  end
+
+
   def initialize(description, status=false, due_date=0, priority=0)
     @description = description
     @status = status
@@ -42,10 +47,6 @@ class Task
 
   def priority
     @priority
-  end
-
-  def save
-    @@all_tasks << self
   end
 
 end
