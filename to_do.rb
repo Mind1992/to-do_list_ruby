@@ -45,14 +45,20 @@ def list_tasks
   selected_task = gets.chomp.to_i
   @task = @list[selected_task - 1]
 
-  p "The currently selected task is #{@task.description}."
-  puts "To mark it as complete and remove it, press 'c'"
-  puts "To move this task to a list press 'mv'"
+  p "The currently selected task is **#{@task.description}**."
+  puts "To mark **#{@task.description}** as complete and remove it, press 'c'"
+  puts "To move **#{@task.description}** to a list press 'mv'"
+  puts "To scale priority for **#{@task.description}**, press 'sp'"
+  puts "To scale due date for **#{@task.description}**, press 'sd'"
   list_option = gets.chomp
   if list_option == 'c'
       @list[selected_task-1].mark_complete
   elsif list_option == 'mv'
         add_task_to_list
+  elsif list_option == 'sp'
+    scale_due_date
+  elsif list_option == 'sd'
+    scale_priority
   else
     puts "Sorry, that wasn't a valid option."
     list_tasks
@@ -86,7 +92,19 @@ def add_task_to_list
   puts "**#{@task.description}** added to the list **#{list.name}**"
 end
 
+def scale_due_date
+  puts "Scale due date from 1 to 5 for **#{@task.description}**: "
+  user_input = gets.chomp.to_i
+  @task.scale_due_date(user_input)
+  puts "You just scaled **#{@task.description}** to #{@task.due_date}"
+end
 
+def scale_priority
+  puts "Scale priority from 1 to 5 for **#{@task.description}**: "
+  user_input = gets.chomp.to_i
+  @task.scale_priority(user_input)
+  puts "You just scaled **#{@task.description}** to #{@task.priority}"
+end
 
 
 main_menu

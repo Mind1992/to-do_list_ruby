@@ -18,7 +18,19 @@ describe Task do
     test_task.mark_complete.should eq true
   end
 
-  it ''
+  it 'sets due date and priority to 0' do
+    test_task = Task.new('scrub the zebra')
+    test_task.due_date.should eq 0
+    test_task.priority.should eq 0
+  end
+
+  it 'lets you scale the due date and priority (on a scale of 1-5)' do
+    test_task = Task.new('scrub the zebra')
+    test_task.scale_due_date(5)
+    test_task.scale_priority(5)
+    test_task.due_date.should eq 5
+    test_task.priority.should eq 5
+  end
 end
 
 

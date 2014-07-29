@@ -1,8 +1,10 @@
 class Task
 
-  def initialize(description, status=false)
+  def initialize(description, status=false, due_date=0, priority=0)
     @description = description
     @status = status
+    @due_date = due_date
+    @priority = priority
   end
 
   def description
@@ -16,5 +18,22 @@ class Task
   def mark_complete
     @status = true
   end
+
+  def due_date
+    @due_date
+  end
+
+  def scale_due_date(number)
+    @due_date = number
+  end
+
+  def scale_priority(number)
+    @priority = number
+  end
+
+  def priority
+    @priority
+  end
+
 end
 
