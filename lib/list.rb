@@ -13,6 +13,10 @@ class List
     @tasks.sort_by {|task| task.description}
   end
 
+  def sort_by_date
+    @tasks.sort_by {|task| task.due_date}
+  end
+
   def save
     @@all_lists << self
   end

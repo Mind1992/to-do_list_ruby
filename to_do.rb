@@ -6,6 +6,7 @@ def main_menu
     puts "Press 'al' to add a new list or 'll' to list all of your lists."
     puts "Press 'a' to add a task or 'l' to list all of your tasks."
     puts "Press 'x' to exit."
+    puts "Press 'sn' to sort your tasks in a list by name"
     main_choice = gets.chomp
     if main_choice == 'a'
       add_task
@@ -17,6 +18,8 @@ def main_menu
       add_list
     elsif main_choice == 'x'
       puts "Good-bye!"
+    elsif main_choice == 'sn'
+      sort_by_name
       exit
     else
       puts "Sorry, that wasn't a valid option."
@@ -107,6 +110,19 @@ def scale_priority
   puts "You just scaled **#{@task.description}** to #{@task.pri}"
 end
 
+def sort_by_name
+  puts "Select a list you want to sort your tasks in."
+  List.all.each do |list|
+    p list.name
+  end
+  puts "To select a list, type the number of the list"
+  selected_list = gets.chomp.to_i
+  list = List.all[selected_list - 1]
+  puts "Sorting #{list.name}.................."
+  list.sort_by_name.each do |task|
+    puts task.description
+  end
+end
 
 
 main_menu
